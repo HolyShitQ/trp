@@ -3,6 +3,8 @@ package com.frq.trp.service.impl;
 import com.frq.trp.mapper.ArticleExtMapper;
 import com.frq.trp.model.Article;
 import com.frq.trp.service.IArticleService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,10 @@ public class ArticleService implements IArticleService {
         return articleExtMapper.queryAllArticle();
     }
 
-//    @Override
-//    public PageInfo<Article> getAllArticle(Integer page, Integer pageSize) {
-//        PageHelper.startPage(page, pageSize);
-//        List<Article> articles = articleExtMapper.queryAllArticle();
-//        return new PageInfo<>(articles);
-//    }
+    @Override
+    public PageInfo<Article> getAllArticle(Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<Article> articles = articleExtMapper.queryAllArticle();
+        return new PageInfo<>(articles);
+    }
 }
