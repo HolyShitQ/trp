@@ -22,7 +22,7 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/trp?characterEncoding=UTF-8&amp;serverTimezone=UTC"
                         userId="root"
-                        password="admin">
+                        password="admin77">
             <!--MySQL 不支持 schema 或者 catalog 所以需要添加这个-->
             <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
