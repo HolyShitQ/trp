@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.frq.trp.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="com.frq.trp.model.User">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name
+    ID, NAME
   </sql>
   <select id="selectByExample" parameterType="com.frq.trp.model.UserExample" resultMap="BaseResultMap">
     select
@@ -84,11 +84,11 @@
     select 
     <include refid="Base_Column_List" />
     from user
-    where id = #{id,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
-    where id = #{id,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.frq.trp.model.UserExample">
     delete from user
@@ -97,17 +97,17 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.frq.trp.model.User">
-    insert into user (id, name)
+    insert into user (ID, NAME)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.frq.trp.model.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        id,
+        ID,
       </if>
       <if test="name != null">
-        name,
+        NAME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -129,10 +129,10 @@
     update user
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        ID = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+        NAME = #{record.name,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -141,8 +141,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update user
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR}
+    set ID = #{record.id,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -151,14 +151,14 @@
     update user
     <set>
       <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+        NAME = #{name,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.frq.trp.model.User">
     update user
-    set name = #{name,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    set NAME = #{name,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

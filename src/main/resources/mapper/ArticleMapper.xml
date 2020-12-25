@@ -2,16 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.frq.trp.mapper.ArticleMapper">
   <resultMap id="BaseResultMap" type="com.frq.trp.model.Article">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
-    <result column="modified_time" jdbcType="VARCHAR" property="modifiedTime" />
-    <result column="creator" jdbcType="VARCHAR" property="creator" />
-    <result column="view_count" jdbcType="INTEGER" property="viewCount" />
-    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.frq.trp.model.Article">
-    <result column="contents" jdbcType="LONGVARCHAR" property="contents" />
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+    <result column="MODIFIED_TIME" jdbcType="VARCHAR" property="modifiedTime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="VIEW_COUNT" jdbcType="INTEGER" property="viewCount" />
+    <result column="LIKE_COUNT" jdbcType="INTEGER" property="likeCount" />
+    <result column="CONTENTS" jdbcType="VARCHAR" property="contents" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,27 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, create_time, modified_time, creator, view_count, like_count
+    ID, TITLE, CREATE_TIME, MODIFIED_TIME, CREATOR, VIEW_COUNT, LIKE_COUNT, CONTENTS
   </sql>
-  <sql id="Blob_Column_List">
-    contents
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.frq.trp.model.ArticleExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from article
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.frq.trp.model.ArticleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -107,17 +86,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from article
-    where id = #{id,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from article
-    where id = #{id,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.frq.trp.model.ArticleExample">
     delete from article
@@ -126,39 +103,39 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.frq.trp.model.Article">
-    insert into article (id, title, create_time, 
-      modified_time, creator, view_count, 
-      like_count, contents)
+    insert into article (ID, TITLE, CREATE_TIME, 
+      MODIFIED_TIME, CREATOR, VIEW_COUNT, 
+      LIKE_COUNT, CONTENTS)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
       #{modifiedTime,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{viewCount,jdbcType=INTEGER}, 
-      #{likeCount,jdbcType=INTEGER}, #{contents,jdbcType=LONGVARCHAR})
+      #{likeCount,jdbcType=INTEGER}, #{contents,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.frq.trp.model.Article">
     insert into article
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        id,
+        ID,
       </if>
       <if test="title != null">
-        title,
+        TITLE,
       </if>
       <if test="createTime != null">
-        create_time,
+        CREATE_TIME,
       </if>
       <if test="modifiedTime != null">
-        modified_time,
+        MODIFIED_TIME,
       </if>
       <if test="creator != null">
-        creator,
+        CREATOR,
       </if>
       <if test="viewCount != null">
-        view_count,
+        VIEW_COUNT,
       </if>
       <if test="likeCount != null">
-        like_count,
+        LIKE_COUNT,
       </if>
       <if test="contents != null">
-        contents,
+        CONTENTS,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -184,7 +161,7 @@
         #{likeCount,jdbcType=INTEGER},
       </if>
       <if test="contents != null">
-        #{contents,jdbcType=LONGVARCHAR},
+        #{contents,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -198,57 +175,44 @@
     update article
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        ID = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
+        TITLE = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=VARCHAR},
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
       </if>
       <if test="record.modifiedTime != null">
-        modified_time = #{record.modifiedTime,jdbcType=VARCHAR},
+        MODIFIED_TIME = #{record.modifiedTime,jdbcType=VARCHAR},
       </if>
       <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=VARCHAR},
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
       </if>
       <if test="record.viewCount != null">
-        view_count = #{record.viewCount,jdbcType=INTEGER},
+        VIEW_COUNT = #{record.viewCount,jdbcType=INTEGER},
       </if>
       <if test="record.likeCount != null">
-        like_count = #{record.likeCount,jdbcType=INTEGER},
+        LIKE_COUNT = #{record.likeCount,jdbcType=INTEGER},
       </if>
       <if test="record.contents != null">
-        contents = #{record.contents,jdbcType=LONGVARCHAR},
+        CONTENTS = #{record.contents,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update article
-    set id = #{record.id,jdbcType=INTEGER},
-      title = #{record.title,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=VARCHAR},
-      modified_time = #{record.modifiedTime,jdbcType=VARCHAR},
-      creator = #{record.creator,jdbcType=VARCHAR},
-      view_count = #{record.viewCount,jdbcType=INTEGER},
-      like_count = #{record.likeCount,jdbcType=INTEGER},
-      contents = #{record.contents,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map">
     update article
-    set id = #{record.id,jdbcType=INTEGER},
-      title = #{record.title,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=VARCHAR},
-      modified_time = #{record.modifiedTime,jdbcType=VARCHAR},
-      creator = #{record.creator,jdbcType=VARCHAR},
-      view_count = #{record.viewCount,jdbcType=INTEGER},
-      like_count = #{record.likeCount,jdbcType=INTEGER}
+    set ID = #{record.id,jdbcType=INTEGER},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      MODIFIED_TIME = #{record.modifiedTime,jdbcType=VARCHAR},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      VIEW_COUNT = #{record.viewCount,jdbcType=INTEGER},
+      LIKE_COUNT = #{record.likeCount,jdbcType=INTEGER},
+      CONTENTS = #{record.contents,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,48 +221,38 @@
     update article
     <set>
       <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
+        TITLE = #{title,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=VARCHAR},
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="modifiedTime != null">
-        modified_time = #{modifiedTime,jdbcType=VARCHAR},
+        MODIFIED_TIME = #{modifiedTime,jdbcType=VARCHAR},
       </if>
       <if test="creator != null">
-        creator = #{creator,jdbcType=VARCHAR},
+        CREATOR = #{creator,jdbcType=VARCHAR},
       </if>
       <if test="viewCount != null">
-        view_count = #{viewCount,jdbcType=INTEGER},
+        VIEW_COUNT = #{viewCount,jdbcType=INTEGER},
       </if>
       <if test="likeCount != null">
-        like_count = #{likeCount,jdbcType=INTEGER},
+        LIKE_COUNT = #{likeCount,jdbcType=INTEGER},
       </if>
       <if test="contents != null">
-        contents = #{contents,jdbcType=LONGVARCHAR},
+        CONTENTS = #{contents,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.frq.trp.model.Article">
-    update article
-    set title = #{title,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR},
-      modified_time = #{modifiedTime,jdbcType=VARCHAR},
-      creator = #{creator,jdbcType=VARCHAR},
-      view_count = #{viewCount,jdbcType=INTEGER},
-      like_count = #{likeCount,jdbcType=INTEGER},
-      contents = #{contents,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.frq.trp.model.Article">
     update article
-    set title = #{title,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR},
-      modified_time = #{modifiedTime,jdbcType=VARCHAR},
-      creator = #{creator,jdbcType=VARCHAR},
-      view_count = #{viewCount,jdbcType=INTEGER},
-      like_count = #{likeCount,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    set TITLE = #{title,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      MODIFIED_TIME = #{modifiedTime,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      VIEW_COUNT = #{viewCount,jdbcType=INTEGER},
+      LIKE_COUNT = #{likeCount,jdbcType=INTEGER},
+      CONTENTS = #{contents,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
